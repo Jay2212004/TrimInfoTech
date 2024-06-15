@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- <style>
+        .password-toggle {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%; /* Ensures the password input fills its container */
+        }
+        .password-toggle input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+            width: 100%; /* Ensures the input fills the password-toggle container */
+        }
+        .password-toggle .toggle-eye {
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to TrimbakInfoTech</h1>
+        <div class="login-container">
+            <h2>Login</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form id="login-form" action="/login" method="POST">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password</label>
+                <div class="password-toggle">
+                    <input type="password" id="password" name="password" required>
+                    <span class="toggle-eye" onclick="togglePassword('password')">👁️</span>
+                </div>
+                
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type === 'password' ? input.type = 'text' : input.type = 'password';
+        }
+    </script>
+</body>
+</html>
